@@ -1,7 +1,8 @@
-CREATE TABLE IF NOT EXISTS sensor_data (
+CREATE TABLE IF NOT EXISTS mushroominator.sensor_data (
   id SERIAL PRIMARY KEY,
   device_id VARCHAR,
   temperature INT,
   humidity INT,
-  creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  creation_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (device_id) REFERENCES mushroominator.device(device_id)
 );

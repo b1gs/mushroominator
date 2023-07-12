@@ -1,6 +1,6 @@
-CREATE TABLE IF NOT EXISTS device (
+CREATE TABLE IF NOT EXISTS mushroominator.device (
   id SERIAL PRIMARY KEY,
-  device_id VARCHAR,
+  device_id VARCHAR UNIQUE,
   description VARCHAR,
-  creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  creation_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

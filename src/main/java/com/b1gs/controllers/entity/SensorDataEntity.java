@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "sensor_data", schema = "mushroominator")
 @Data
@@ -22,5 +24,8 @@ public class SensorDataEntity {
 
     @Column(name = "humidity")
     private int humidity;
+
+    @Column(name = "creation_dt")
+    private LocalDateTime creationDate;
 
 }

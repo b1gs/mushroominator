@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "sensor_data", schema = "mushroominator")
+@Table(name = "device", schema = "mushroominator")
 @Data
 @ToString
 public class DeviceEntity {
@@ -17,10 +19,11 @@ public class DeviceEntity {
     @Column(name = "device_id")
     private String deviceId;
 
-    @Column(name = "temperature")
-    private int temperature;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "humidity")
-    private int humidity;
+    @Column(name = "creation_dt")
+    private LocalDateTime creationDate;
+
 
 }
