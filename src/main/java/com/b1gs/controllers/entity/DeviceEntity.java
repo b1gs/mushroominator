@@ -25,5 +25,4 @@ public class DeviceEntity {
     @Column(name = "creation_dt")
     private LocalDateTime creationDate;
 
-
 }

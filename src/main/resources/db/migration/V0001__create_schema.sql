@@ -1,1 +1,1 @@
-CREATE SCHEMA IF NOT EXISTS mushroominator AUTHORIZATION mushroom;
+CREATE SCHEMA IF NOT EXISTS mushroominator;

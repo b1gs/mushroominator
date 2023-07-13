@@ -16,6 +16,7 @@ public interface SensorDataMapper {
     @Mapping(source = "deviceId", target = "deviceId")
     @Mapping(source = "temperature", target = "temperature")
     @Mapping(source = "humidity", target = "humidity")
+    @Mapping(expression = "java(java.time.LocalDateTime.now())", target = "creationDate")
     SensorDataEntity toEntity(SensorDataDto dto);
 
 }

@@ -1,9 +1,7 @@
 package com.b1gs.controllers.mappers;
 
 import com.b1gs.controllers.controller.dto.DeviceDto;
-import com.b1gs.controllers.controller.dto.SensorDataDto;
 import com.b1gs.controllers.entity.DeviceEntity;
-import com.b1gs.controllers.entity.SensorDataEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,6 +14,7 @@ public interface DeviceMapper {
 
     @Mapping(expression = "java(java.util.UUID.randomUUID().toString())", target = "deviceId")
     @Mapping(source = "description", target = "description")
+    @Mapping(expression = "java(java.time.LocalDateTime.now())", target = "creationDate")
     DeviceEntity toEntity(DeviceDto dto);
 
 }
