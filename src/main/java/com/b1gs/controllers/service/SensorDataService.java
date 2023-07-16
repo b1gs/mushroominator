@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -30,10 +29,9 @@ public class SensorDataService {
         repository.save(sensorDataEntity);
     }
 
-    public Page<SensorDataDto> getSensorDataBy(String deviceId, int pageNumber, int pageSize) {
+    public Page<SensorDataDto> getSensorDataBy(String deviceId, Pageable pageable) {
         log.info("Getting sensor data for deviceId({})", deviceId);
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<SensorDataEntity> page = repository.getAllByDeviceIdOrderByCreationDateDesc(deviceId, pageable);
+        Page<SensorDataEntity> page = repository.getAllByDeviceId(deviceId, pageable);
 
         List<SensorDataDto> content = page
                 .getContent()
