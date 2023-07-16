@@ -19,6 +19,9 @@ public class SensorDataEntity {
     @Column(name = "device_id")
     private String deviceId;
 
+    @Column(name = "sensor_description")
+    private String sensorDescription;
+
     @Column(name = "temperature")
     private int temperature;
 
