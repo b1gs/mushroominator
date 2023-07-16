@@ -7,6 +7,10 @@ import com.b1gs.controllers.repository.SensorDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,11 +30,17 @@ public class SensorDataService {
         repository.save(sensorDataEntity);
     }
 
-    public List<SensorDataDto> getSensorDataBy(String deviceId) {
+    public Page<SensorDataDto> getSensorDataBy(String deviceId, int pageNumber, int pageSize) {
         log.info("Getting sensor data for deviceId({})", deviceId);
-        return repository.getAllByDeviceIdOrderByCreationDateDesc(deviceId)
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<SensorDataEntity> page = repository.getAllByDeviceIdOrderByCreationDateDesc(deviceId, pageable);
+
+        List<SensorDataDto> content = page
+                .getContent()
                 .stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
+
+        return new PageImpl<SensorDataDto>(content , pageable, page.getTotalElements());
     }
 }
