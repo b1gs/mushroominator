@@ -23,10 +23,10 @@ public class SensorDataEntity {
     private String sensorDescription;
 
     @Column(name = "temperature")
-    private int temperature;
+    private String temperature;
 
     @Column(name = "humidity")
-    private int humidity;
+    private String humidity;
 
     @Column(name = "creation_dt")
     private LocalDateTime creationDate;

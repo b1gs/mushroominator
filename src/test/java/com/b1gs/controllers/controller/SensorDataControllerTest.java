@@ -4,7 +4,6 @@ import com.b1gs.controllers.controller.dto.DeviceDto;
 import com.b1gs.controllers.controller.dto.SensorDataDto;
 import com.b1gs.controllers.service.DeviceService;
 import com.b1gs.controllers.service.SensorDataService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +16,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -47,17 +48,17 @@ class SensorDataControllerTest {
         // Prepare a SensorDataDto for the request body
         SensorDataDto sensorDataDto = new SensorDataDto();
         sensorDataDto.setDeviceId("device-id");
-        sensorDataDto.setTemperature(25);
-        sensorDataDto.setHumidity(50);
+        sensorDataDto.setTemperature("25");
+        sensorDataDto.setHumidity("50");
 
         // Perform a POST request to /sensor-data
         mockMvc.perform(MockMvcRequestBuilders.post("/sensor-data")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"deviceId\":\"device-id\",\"temperature\":25,\"humidity\":50}"))
+                .content("[{\"deviceId\":\"device-id\",\"temperature\":25,\"humidity\":50, \"description\":\"b1gs sensor\"}]"))
                 .andExpect(status().isCreated());
 
         // Verify that the createSensorData method is called with the provided SensorDataDto
-        verify(sensorDataService).createSensorData(sensorDataDto);
+        verify(sensorDataService).createSensorData(List.of(sensorDataDto));
     }
 
     @Test

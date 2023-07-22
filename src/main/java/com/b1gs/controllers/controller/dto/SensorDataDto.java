@@ -9,8 +9,8 @@ public class SensorDataDto {
 
     private String deviceId;
     private String sensorDescription;
-    private int temperature;
-    private int humidity;
+    private String temperature;
+    private String humidity;
     private LocalDateTime creationDate;
 
 }

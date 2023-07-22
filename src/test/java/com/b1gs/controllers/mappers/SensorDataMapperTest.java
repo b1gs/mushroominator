@@ -17,16 +17,16 @@ class SensorDataMapperTest {
         SensorDataEntity entity = new SensorDataEntity();
         entity.setId(1L);
         entity.setDeviceId("ba306028-aecd-42fd-b9a5-f5462fde797a");
-        entity.setTemperature(25);
-        entity.setHumidity(50);
+        entity.setTemperature("25");
+        entity.setHumidity("50");
 
         // Map the SensorDataEntity to SensorDataDto
         SensorDataDto dto = sensorDataMapper.toDto(entity);
 
         // Assert the mapping results
         assertEquals("ba306028-aecd-42fd-b9a5-f5462fde797a", dto.getDeviceId());
-        assertEquals(25, dto.getTemperature());
-        assertEquals(50, dto.getHumidity());
+        assertEquals("25", dto.getTemperature());
+        assertEquals("50", dto.getHumidity());
     }
 
     @Test
@@ -43,16 +43,16 @@ class SensorDataMapperTest {
         // Create a SensorDataDto
         SensorDataDto dto = new SensorDataDto();
         dto.setDeviceId("ba306028-aecd-42fd-b9a5-f5462fde797a");
-        dto.setTemperature(25);
-        dto.setHumidity(50);
+        dto.setTemperature("25");
+        dto.setHumidity("50");
 
         // Map the SensorDataDto to SensorDataEntity
         SensorDataEntity entity = sensorDataMapper.toEntity(dto);
 
         // Assert the mapping results
         assertEquals("ba306028-aecd-42fd-b9a5-f5462fde797a", entity.getDeviceId());
-        assertEquals(25, entity.getTemperature());
-        assertEquals(50, entity.getHumidity());
+        assertEquals("25", entity.getTemperature());
+        assertEquals("50", entity.getHumidity());
     }
 
     @Test

@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -30,14 +32,14 @@ class SensorDataServiceTest {
         // Prepare a SensorDataDto for the input
         SensorDataDto sensorDataDto = new SensorDataDto();
         sensorDataDto.setDeviceId("device-id");
-        sensorDataDto.setTemperature(25);
-        sensorDataDto.setHumidity(50);
+        sensorDataDto.setTemperature("25");
+        sensorDataDto.setHumidity("50");
 
         // Prepare a SensorDataEntity for the repository save method
         SensorDataEntity sensorDataEntityToSave = sensorDataMapper.toEntity(sensorDataDto);
 
         // Call the createSensorData method
-        sensorDataService.createSensorData(sensorDataDto);
+        sensorDataService.createSensorData(List.of(sensorDataDto));
 
         // Verify the repository.save method is called with the correct SensorDataEntity
         verify(sensorDataRepository, times(1)).save(sensorDataEntityToSave);

@@ -1,6 +1,7 @@
 package com.b1gs.controllers.service;
 
 import com.b1gs.controllers.controller.dto.SensorDataDto;
+import com.b1gs.controllers.controller.dto.SensorDataList;
 import com.b1gs.controllers.entity.SensorDataEntity;
 import com.b1gs.controllers.mappers.SensorDataMapper;
 import com.b1gs.controllers.repository.SensorDataRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,13 +25,17 @@ public class SensorDataService {
     private final SensorDataRepository repository;
     private final SensorDataMapper mapper = Mappers.getMapper(SensorDataMapper.class);
 
-    public void createSensorData(SensorDataDto dto) {
-        SensorDataEntity sensorDataEntity = mapper.toEntity(dto);
+    public void createSensorData(List<SensorDataDto> sensorDataList) {
+        List<SensorDataEntity> sensorDataEntities = sensorDataList.stream()
+                .map(mapper::toEntity)
+                .collect(Collectors.toList());
 
-        repository.save(sensorDataEntity);
+        log.info("Created sensor data for deviceId({})", sensorDataList.get(0).getDeviceId());
+        repository.saveAll(sensorDataEntities);
+
     }
 
-    public Page<SensorDataDto> getSensorDataBy(String deviceId, Pageable pageable) {
+    public Page<SensorDataList> getSensorDataBy(String deviceId, Pageable pageable) {
         log.info("Getting sensor data for deviceId({})", deviceId);
         Page<SensorDataEntity> page = repository.getAllByDeviceId(deviceId, pageable);
 
@@ -39,6 +45,26 @@ public class SensorDataService {
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
 
-        return new PageImpl<SensorDataDto>(content , pageable, page.getTotalElements());
+
+        List<SensorDataList> result = content.stream()
+                .collect(Collectors.groupingBy(SensorDataDto::getSensorDescription))
+                .values() // Get the Collection<List<SensorData>> (grouped lists)
+                .stream()
+                .map(SensorDataList::new)// Convert the Collection back to Stream
+                .collect(Collectors.toList());
+
+        return new PageImpl<SensorDataList>(result , pageable, page.getTotalElements());
+    }
+
+    public List<SensorDataList> getSensorDataBy(String deviceId, LocalDateTime startDate, LocalDateTime endDate) {
+
+        return repository.getAllByDeviceIdAndCreationDateBetween(deviceId, startDate, endDate)
+                .stream()
+                .map(mapper::toDto)
+                .collect(Collectors.groupingBy(SensorDataDto::getSensorDescription))
+                .values() // Get the Collection<List<SensorData>> (grouped lists)
+                .stream()
+                .map(SensorDataList::new)// Convert the Collection back to Stream
+                .collect(Collectors.toList());
     }
 }
