@@ -13,3 +13,5 @@ spring:
     user: mushroom
     password: mushroom123
     default-schema: mushroominator
+
+#logging.level.org.springframework.web: DEBUG
