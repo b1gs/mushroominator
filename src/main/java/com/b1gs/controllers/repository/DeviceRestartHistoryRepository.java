@@ -11,4 +11,5 @@ import java.util.List;
 public interface DeviceRestartHistoryRepository extends CrudRepository<DeviceRestartHistoryEntity, Long> {
 
     List<DeviceRestartHistoryEntity> findAllByDeviceIdAndCreationDateBetween(String deviceId, LocalDateTime startDate, java.time.LocalDateTime endDate);
+    List<DeviceRestartHistoryEntity> findAllByDeviceId(String deviceId);
 }
