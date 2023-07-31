@@ -1,12 +1,13 @@
 package com.b1gs.controllers.service;
 
+import com.b1gs.controllers.configuration.properties.RabbitProperties;
 import com.b1gs.controllers.controller.dto.DeviceConfigurationDto;
 import com.b1gs.controllers.entity.DeviceConfigurationEntity;
 import com.b1gs.controllers.mappers.DeviceConfigurationMapper;
+import com.b1gs.controllers.rabbitmq.message.DeviceConfigurationMessage;
 import com.b1gs.controllers.repository.DeviceConfigurationRepository;
 import com.b1gs.controllers.repository.DeviceRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
@@ -14,15 +15,29 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class DeviceConfigurationService {
+
+
+    private final String brokerHost;
+    private final int mqttPort;
 
     private final DeviceConfigurationRepository configurationRepository;
     private final DeviceRepository deviceRepository;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private final DeviceConfigurationMapper mapper = Mappers.getMapper(DeviceConfigurationMapper.class);
 
     private final RabbitmqService rabbitmqService;
+
+    public DeviceConfigurationService(DeviceConfigurationRepository configurationRepository,
+                                      DeviceRepository deviceRepository,
+                                      RabbitmqService rabbitmqService,
+                                      RabbitProperties rabbitProperties) {
+        this.configurationRepository = configurationRepository;
+        this.deviceRepository = deviceRepository;
+        this.rabbitmqService = rabbitmqService;
+        this.brokerHost = rabbitProperties.getHost();
+        this.mqttPort = rabbitProperties.getMqttport();
+    }
 
     public DeviceConfigurationDto createDeviceConfiguration(DeviceConfigurationDto configurationDto) {
         String deviceId = configurationDto.getDeviceId();
@@ -40,7 +55,11 @@ public class DeviceConfigurationService {
 
     @SneakyThrows
     private void sentMessageToController(DeviceConfigurationDto configurationDto){
-        String jsonToSent = objectMapper.writeValueAsString(mapper.toMessage(configurationDto));
+        DeviceConfigurationMessage message = mapper.toMessage(configurationDto);
+        message.setBrokerIp(brokerHost);
+        message.setBrokerPort(mqttPort);
+
+        String jsonToSent = objectMapper.writeValueAsString(message);
         rabbitmqService.sendMessage(configurationDto.getDeviceId(), jsonToSent);
     }
 

@@ -18,6 +18,10 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "fanWorkPeriodInterval", target = "fanWorkPeriodInterval")
     @Mapping(source = "pumpWorkInterval", target = "pumpWorkInterval")
     @Mapping(source = "humidityThreshold", target = "humidityThreshold")
+    @Mapping(source = "fanRelayPin", target = "fanRelayPin")
+    @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
+    @Mapping(source = "dhtSensor1", target = "dhtSensor1")
+    @Mapping(source = "dhtSensor2", target = "dhtSensor2")
     @Mapping(source = "createDate", target = "createDate")
     @Mapping(source = "updateDate", target = "updateDate")
     DeviceConfigurationDto toDto(DeviceConfigurationEntity entity);
@@ -29,6 +33,10 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "fanWorkPeriodInterval", target = "fanWorkPeriodInterval")
     @Mapping(source = "pumpWorkInterval", target = "pumpWorkInterval")
     @Mapping(source = "humidityThreshold", target = "humidityThreshold")
+    @Mapping(source = "fanRelayPin", target = "fanRelayPin")
+    @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
+    @Mapping(source = "dhtSensor1", target = "dhtSensor1")
+    @Mapping(source = "dhtSensor2", target = "dhtSensor2")
     @Mapping(source = "createDate", target = "createDate")
     @Mapping(source = "updateDate", target = "updateDate")
     DeviceConfigurationEntity toEntity(DeviceConfigurationDto dto);
@@ -44,8 +52,6 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
-    @Mapping(source = "brokerIp", target = "brokerIp")
-    @Mapping(source = "brokerPort", target = "brokerPort")
     DeviceConfigurationMessage toMessage(DeviceConfigurationDto dto);
 
 
@@ -61,8 +67,6 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
-    @Mapping(source = "brokerIp", target = "brokerIp")
-    @Mapping(source = "brokerPort", target = "brokerPort")
     @Mapping(expression = "java(java.time.LocalDateTime.now())", target = "updateDate")
     DeviceConfigurationEntity update(DeviceConfigurationEntity source, @MappingTarget DeviceConfigurationEntity target);
 

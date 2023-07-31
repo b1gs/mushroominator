@@ -19,8 +19,6 @@ public class DeviceConfigurationDto {
     private int pumpRelayPin;
     private int dhtSensor1;
     private int dhtSensor2;
-    private String brokerIp;
-    private int brokerPort;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 

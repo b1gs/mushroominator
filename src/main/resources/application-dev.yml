@@ -14,9 +14,10 @@ spring:
     password: mushroom123
     default-schema: mushroominator
 
-  rabbitmq:
-    host: 192.168.0.204
-    port: 5672
-    username: alex
+rabbitmq:
+  host: 192.168.0.204
+  port: 5672
+  mqttport: 1883
+  username: alex
 
 #logging.level.org.springframework.web: DEBUG

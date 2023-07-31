@@ -1,12 +1,12 @@
 package com.b1gs.controllers.configuration;
 
+import com.b1gs.controllers.configuration.properties.RabbitProperties;
 import com.b1gs.controllers.rabbitmq.DeviceRestartMessageListener;
 import com.b1gs.controllers.rabbitmq.SensorDataMessageListener;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,25 +17,13 @@ public class RabbitConfig {
     private static final String DEVICE_RESTART_QUEUE_NAME = "device-restart";
     private static final String SENSOR_DATA_QUEUE_NAME = "sensor-data";
 
-    @Value("${spring.rabbitmq.host}")
-    private String rabbitHost;
-
-    @Value("${spring.rabbitmq.port}")
-    private int rabbitPort;
-
-    @Value("${spring.rabbitmq.username}")
-    private String rabbitUser;
-
-    @Value("${rabbit.password}")
-    private String rabbitPassword;
-
     @Bean
-    public ConnectionFactory connectionFactory() {
+    public ConnectionFactory connectionFactory(RabbitProperties rabbitProperties) {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setHost(rabbitHost);
-        connectionFactory.setPort(rabbitPort);
-        connectionFactory.setUsername(rabbitUser);
-        connectionFactory.setPassword(rabbitPassword);
+        connectionFactory.setHost(rabbitProperties.getHost());
+        connectionFactory.setPort(rabbitProperties.getPort());
+        connectionFactory.setUsername(rabbitProperties.getUsername());
+        connectionFactory.setPassword(rabbitProperties.getPassword());
         return connectionFactory;
     }
 

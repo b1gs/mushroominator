@@ -49,12 +49,6 @@ public class DeviceConfigurationEntity {
     @Column(name = "dht_sensor_2")
     private int dhtSensor2;
 
-    @Column(name = "broker_ip")
-    private String brokerIp;
-
-    @Column(name = "broker_port")
-    private int brokerPort;
-
     @Column(name = "create_dt")
     private LocalDateTime createDate;
 
