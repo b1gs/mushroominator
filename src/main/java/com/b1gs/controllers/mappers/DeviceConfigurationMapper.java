@@ -54,6 +54,18 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
     DeviceConfigurationMessage toMessage(DeviceConfigurationDto dto);
 
+    @Mapping(source = "deviceId", target = "deviceId")
+    @Mapping(source = "sensorDataInterval", target = "sensorDataInterval")
+    @Mapping(source = "sensorReadInterval", target = "sensorReadInterval")
+    @Mapping(source = "fanWorkInterval", target = "fanWorkInterval")
+    @Mapping(source = "fanWorkPeriodInterval", target = "fanWorkPeriodInterval")
+    @Mapping(source = "pumpWorkInterval", target = "pumpWorkInterval")
+    @Mapping(source = "humidityThreshold", target = "humidityThreshold")
+    @Mapping(source = "fanRelayPin", target = "fanRelayPin")
+    @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
+    @Mapping(source = "dhtSensor1", target = "dhtSensor1")
+    @Mapping(source = "dhtSensor2", target = "dhtSensor2")
+    DeviceConfigurationMessage toMessage(DeviceConfigurationEntity entity);
 
     @Mapping(ignore = true, target = "id")
     @Mapping(source = "deviceId", target = "deviceId")

@@ -1,10 +1,12 @@
 package com.b1gs.controllers.rabbitmq.message;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
 @ToString
+@EqualsAndHashCode(exclude = {"brokerIp", "brokerPort"})
 public class DeviceConfigurationMessage {
 
     private String deviceId;
