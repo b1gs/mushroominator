@@ -34,11 +34,14 @@ public class SensorDataMessageListener implements MessageListener {
             log.info("Saving sensor data for deviceId={}", sensorDataDtos.get(0).getDeviceId());
 
             List<SensorDataEntity> sensorDataToSave = sensorDataDtos.stream()
-                    .filter((item) -> Float.valueOf(item.getTemperature()) < 0)
+                    .filter((item) -> Float.valueOf(item.getTemperature()) > 0)
                     .map(mapper::toEntity)
                     .collect(Collectors.toList());
 
-            if (sensorDataToSave.size() > 0 ) {
+            if (sensorDataDtos.size() != sensorDataToSave.size()) {
+                log.info("Some data was removed, sensor size {}, filtered sensor data {}", sensorDataDtos.size(), sensorDataToSave.size());
+            }
+            if (sensorDataToSave.size() > 0) {
                 repository.saveAll(sensorDataToSave);
             } else {
                 log.info("All sensor data was filtered out");

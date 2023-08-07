@@ -2,15 +2,15 @@ package com.b1gs.controllers.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "device_configuration", schema = "mushroominator")
 @Data
 @ToString
-public class DeviceConfigurationEntity {
+@EqualsAndHashCode(callSuper = false)
+public class DeviceConfigurationEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,9 +49,4 @@ public class DeviceConfigurationEntity {
     @Column(name = "dht_sensor_2")
     private int dhtSensor2;
 
-    @Column(name = "create_dt")
-    private LocalDateTime createDate;
-
-    @Column(name = "update_dt")
-    private LocalDateTime updateDate;
 }

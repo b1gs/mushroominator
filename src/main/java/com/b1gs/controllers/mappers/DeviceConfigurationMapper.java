@@ -79,7 +79,8 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
-    @Mapping(expression = "java(java.time.LocalDateTime.now())", target = "updateDate")
+    @Mapping(ignore = true, target = "createDate")
+    @Mapping(ignore = true, target = "updateDate")
     DeviceConfigurationEntity update(DeviceConfigurationEntity source, @MappingTarget DeviceConfigurationEntity target);
 
 }

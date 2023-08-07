@@ -2,15 +2,15 @@ package com.b1gs.controllers.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "telegram_chat", schema = "mushroominator")
 @Data
 @ToString
-public class TelegramChatEntity {
+@EqualsAndHashCode(callSuper = false)
+public class TelegramChatEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +33,5 @@ public class TelegramChatEntity {
 
     @Column(name = "device_id")
     private String deviceId;
-
-    @Column(name = "create_dt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createDate;
-
-    @Column(name = "update_dt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime updateDate;
 
 }

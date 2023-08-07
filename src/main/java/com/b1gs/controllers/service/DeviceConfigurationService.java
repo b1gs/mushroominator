@@ -53,6 +53,12 @@ public class DeviceConfigurationService {
         }
     }
 
+    public DeviceConfigurationDto getDeviceConfiguration(String deviceId){
+        DeviceConfigurationEntity entity = configurationRepository.findByDeviceId(deviceId).orElseThrow(() -> new IllegalArgumentException("deviceId not found"));
+
+        return mapper.toDto(entity);
+    }
+
     @SneakyThrows
     private void sentMessageToController(DeviceConfigurationDto configurationDto){
         DeviceConfigurationMessage message = mapper.toMessage(configurationDto);
