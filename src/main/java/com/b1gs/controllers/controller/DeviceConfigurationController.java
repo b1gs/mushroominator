@@ -13,7 +13,7 @@ public class DeviceConfigurationController {
     private final DeviceConfigurationService configurationService;
 
     @PutMapping(value = "/devices/{deviceId}/configuration", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public DeviceConfigurationDto createDevice(@PathVariable("deviceId") String deviceId, @RequestBody DeviceConfigurationDto dto) {
+    public DeviceConfigurationDto createDeviceConfiguration(@PathVariable("deviceId") String deviceId, @RequestBody DeviceConfigurationDto dto) {
 
         dto.setDeviceId(deviceId);
         return configurationService.createDeviceConfiguration(dto);

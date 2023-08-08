@@ -9,6 +9,7 @@ import lombok.ToString;
 @EqualsAndHashCode(exclude = {"brokerIp", "brokerPort"})
 public class DeviceConfigurationMessage {
 
+    private EventType eventType = EventType.CONGIG_UPDATE;
     private String deviceId;
     private int sensorDataInterval;
     private int sensorReadInterval;

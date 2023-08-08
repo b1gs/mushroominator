@@ -1,6 +1,5 @@
 package com.b1gs.controllers.controller;
 
-import com.b1gs.controllers.controller.dto.DeviceDto;
 import com.b1gs.controllers.controller.dto.SensorDataDto;
 import com.b1gs.controllers.controller.dto.SensorDataList;
 import com.b1gs.controllers.service.DeviceService;
@@ -58,14 +57,6 @@ public class SensorDataController {
     public void supplySensorDataByDateRange(@RequestBody List<SensorDataDto> sensorDataList) {
 
         sensorDataService.createSensorData(sensorDataList);
-    }
-
-    @PostMapping(value = "/devices", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createDevice(@RequestBody DeviceDto dto) {
-
-        DeviceDto device = deviceService.createDevice(dto);
-
-        return device.getDeviceId();
     }
 
 }
