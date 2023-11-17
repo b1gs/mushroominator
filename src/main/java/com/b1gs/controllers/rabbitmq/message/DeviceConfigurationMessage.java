@@ -21,6 +21,7 @@ public class DeviceConfigurationMessage {
     private int pumpRelayPin;
     private int dhtSensor1;
     private int dhtSensor2;
+    private int dhtSensor3;
     private String brokerIp;
     private int brokerPort;
 
