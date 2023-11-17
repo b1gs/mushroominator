@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo 'Building the Java project...'
+#      - echo 'Removing SNAPSHOT part from artifact name'
+#      - mvn release:prepare
+      - echo 'Running tests and packing a project...'
+      - mvn clean package
+#      - echo 'Pushing new version to github repository...'
+#      - mvn release:perform
+#      - echo $MY_PROJECT_VERSION
+
+artifacts:
+  files: target/mushroominator-0.0.1-SNAPSHOT.jar

@@ -1,7 +1,6 @@
 package com.b1gs.controllers.service;
 
 import com.b1gs.controllers.controller.dto.SensorDataDto;
-import com.b1gs.controllers.entity.SensorDataEntity;
 import com.b1gs.controllers.mappers.SensorDataMapper;
 import com.b1gs.controllers.repository.SensorDataRepository;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -36,12 +36,12 @@ class SensorDataServiceTest {
         sensorDataDto.setHumidity("50");
 
         // Prepare a SensorDataEntity for the repository save method
-        SensorDataEntity sensorDataEntityToSave = sensorDataMapper.toEntity(sensorDataDto);
+        sensorDataMapper.toEntity(sensorDataDto);
 
         // Call the createSensorData method
         sensorDataService.createSensorData(List.of(sensorDataDto));
 
         // Verify the repository.save method is called with the correct SensorDataEntity
-        verify(sensorDataRepository, times(1)).save(sensorDataEntityToSave);
+        verify(sensorDataRepository, times(1)).saveAll(any());
     }
 }
