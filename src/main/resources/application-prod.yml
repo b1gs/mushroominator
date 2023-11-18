@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mushroominator_prod
+    username: mushroominator
+
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    url: jdbc:postgresql://localhost:5432/mushroominator_prod
+    user: mushroominator
+    default-schema: mushroominator
+
+rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  mqttport: 1883
+  username: mushroom-rabbitmq
+
+telegram.bot:
+  username: mushroominatoaws_bot

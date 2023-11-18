@@ -8,9 +8,15 @@ phases:
 #      - mvn release:prepare
       - echo 'Running tests and packing a project...'
       - mvn clean package
+      - cp appspec.yml target
+      - cp -r scripts target
+      - cd target
+      - zip -r mushroominator-0.0.1-SNAPSHOT.zip mushroominator-0.0.1-SNAPSHOT.jar scripts appspec.yml
+      - cd ..
+      - cp target/mushroominator-0.0.1-SNAPSHOT.zip .
 #      - echo 'Pushing new version to github repository...'
 #      - mvn release:perform
 #      - echo $MY_PROJECT_VERSION
 
 artifacts:
-  files: target/mushroominator-0.0.1-SNAPSHOT.jar
+  files: mushroominator-0.0.1-SNAPSHOT.zip
