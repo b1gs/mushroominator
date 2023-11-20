@@ -23,3 +23,7 @@ rabbitmq:
 
 telegram.bot:
   username: mushroominatoaws_bot
+
+cors:
+  origins:
+    - https://mushroominator.net
