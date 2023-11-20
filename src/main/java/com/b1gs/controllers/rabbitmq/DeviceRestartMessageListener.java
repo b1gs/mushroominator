@@ -71,7 +71,15 @@ public class DeviceRestartMessageListener implements MessageListener {
     private boolean isConfigChanged(DeviceConfigurationMessage deviceConfigurationMessage) {
 
         DeviceConfigurationEntity deviceConfigurationEntity = deviceConfigurationRepository.findByDeviceId(deviceConfigurationMessage.getDeviceId())
-                .orElseThrow(() -> new IllegalArgumentException(String.format("DeviceId doesn't exists %s", deviceConfigurationMessage.getDeviceId())));
+                .orElse(null);
+
+        if (deviceConfigurationEntity == null ) {
+            log.error("Config doesn't exist, creating a new one");
+
+            DeviceConfigurationEntity newConfig = deviceConfigurationMapper.toEntity(deviceConfigurationMessage);
+            deviceConfigurationRepository.save(newConfig);
+            return true;
+        }
 
         DeviceConfigurationMessage databaseConfigAsMessage = deviceConfigurationMapper.toMessage(deviceConfigurationEntity);
 

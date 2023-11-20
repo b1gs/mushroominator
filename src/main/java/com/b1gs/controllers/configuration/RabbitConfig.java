@@ -52,6 +52,8 @@ public class RabbitConfig {
         container.setQueueNames(sensorDataQueueName);
         container.setConnectionFactory(connectionFactory);
         container.setMessageListener(sensorDataListenerAdapter);
+
+        container.setDefaultRequeueRejected(false);
         return container;
     }
 }
