@@ -3,6 +3,10 @@
 
 echo "inside a script!!!!"
 
+sudo systemctl stop mushroominator
+
+sudo systemctl status mushroominator
+
 sudo chown -R ubuntu:ubuntu /var/log/mushroominator/*
 
 sudo chown -R ubuntu:ubuntu /home/ubuntu/projects/tmp/mushroominator/*
@@ -31,4 +35,4 @@ ls -al
 
 echo "Starting java application..."
 
-java -jar mushroominator-0.0.1-SNAPSHOT.jar > /var/log/mushroominator/output.log 2>&1
+sudo systemctl start mushroominator
