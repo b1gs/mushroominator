@@ -75,6 +75,7 @@ public class MushroominatorTelegramBot extends TelegramLongPollingBot {
             TelegramChatEntity chat = new TelegramChatEntity();
             chat.setChatId(chatId);
             chat.setUserId(userId);
+            chat.setUsername(user.getUserName());
             chat.setFirstName(user.getFirstName());
             chat.setLastName(user.getLastName());
             chat.setCreateDate(LocalDateTime.now());

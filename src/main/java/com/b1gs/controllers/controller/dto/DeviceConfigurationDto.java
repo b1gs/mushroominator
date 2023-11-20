@@ -19,6 +19,7 @@ public class DeviceConfigurationDto {
     private int pumpRelayPin;
     private int dhtSensor1;
     private int dhtSensor2;
+    private int dhtSensor3;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 

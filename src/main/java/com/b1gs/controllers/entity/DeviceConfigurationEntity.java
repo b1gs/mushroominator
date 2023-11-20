@@ -49,4 +49,7 @@ public class DeviceConfigurationEntity extends BaseEntity {
     @Column(name = "dht_sensor_2")
     private int dhtSensor2;
 
+    @Column(name = "dht_sensor_3")
+    private int dhtSensor3;
+
 }

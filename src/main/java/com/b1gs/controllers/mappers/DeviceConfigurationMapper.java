@@ -22,6 +22,7 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
+    @Mapping(source = "dhtSensor3", target = "dhtSensor3")
     @Mapping(source = "createDate", target = "createDate")
     @Mapping(source = "updateDate", target = "updateDate")
     DeviceConfigurationDto toDto(DeviceConfigurationEntity entity);
@@ -37,6 +38,7 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
+    @Mapping(source = "dhtSensor3", target = "dhtSensor3")
     @Mapping(source = "createDate", target = "createDate")
     @Mapping(source = "updateDate", target = "updateDate")
     DeviceConfigurationEntity toEntity(DeviceConfigurationDto dto);
@@ -52,6 +54,7 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
+    @Mapping(source = "dhtSensor3", target = "dhtSensor3")
     DeviceConfigurationEntity toEntity(DeviceConfigurationMessage message);
 
     @Mapping(source = "deviceId", target = "deviceId")
@@ -65,6 +68,7 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
+    @Mapping(source = "dhtSensor3", target = "dhtSensor3")
     DeviceConfigurationMessage toMessage(DeviceConfigurationDto dto);
 
     @Mapping(source = "deviceId", target = "deviceId")
@@ -78,6 +82,7 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
+    @Mapping(source = "dhtSensor3", target = "dhtSensor3")
     DeviceConfigurationMessage toMessage(DeviceConfigurationEntity entity);
 
     @Mapping(ignore = true, target = "id")
@@ -92,6 +97,7 @@ public interface DeviceConfigurationMapper {
     @Mapping(source = "pumpRelayPin", target = "pumpRelayPin")
     @Mapping(source = "dhtSensor1", target = "dhtSensor1")
     @Mapping(source = "dhtSensor2", target = "dhtSensor2")
+    @Mapping(source = "dhtSensor3", target = "dhtSensor3")
     @Mapping(ignore = true, target = "createDate")
     @Mapping(ignore = true, target = "updateDate")
     DeviceConfigurationEntity update(DeviceConfigurationEntity source, @MappingTarget DeviceConfigurationEntity target);
