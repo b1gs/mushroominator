@@ -28,4 +28,18 @@ cors:
     - http://localhost:4200
     - http://192.168.0.204:4200
 
-#logging.level.org.springframework.web: DEBUG
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation=DEBUG:#logging.level.org.springframework.web: DEBUG
+
+server:
+  error:
+    whitelabel:
+      enabled: false
